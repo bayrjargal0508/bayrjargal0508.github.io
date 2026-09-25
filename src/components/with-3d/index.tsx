@@ -99,7 +99,7 @@ export default function WhatIBuild() {
 
   return (
     <section ref={wrapRef} className="relative h-[200vh]">
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-dvh overflow-hidden">
         {/* the whole panel slides in from the right over the hero */}
         <div
           className="absolute inset-0 will-change-transform"
@@ -131,7 +131,7 @@ export default function WhatIBuild() {
             style={{ background: "rgba(20,28,12,.5)" }}
           />
 
-          <div className="relative z-10 h-full overflow-y-auto flex flex-col justify-center px-5 sm:px-8 md:px-10 py-10 sm:py-12 max-w-none md:max-w-[58%] lg:max-w-[52%]">
+          <div className="relative z-10 h-full overflow-y-auto flex flex-col justify-center-safe px-5 sm:px-8 md:px-10 py-10 sm:py-12 max-w-none md:max-w-[58%] lg:max-w-[52%]">
             {/* the tab's underline is the same seam that separates projects:
                 dashed while idle, stitched shut when active */}
             <div
