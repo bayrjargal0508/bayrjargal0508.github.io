@@ -1,16 +1,13 @@
 import type { NextConfig } from "next";
 
-// project site: served under /<repo>, not at the domain root
-const basePath = "/bayrjargal.github.io";
-
 const nextConfig: NextConfig = {
   output: "export",
-  basePath,
   trailingSlash: true,
   images: { unoptimized: true },
-  // next/link and next/image prefix basePath themselves; raw <video>/poster
-  // attributes do not, so they read it from here
-  env: { NEXT_PUBLIC_BASE_PATH: basePath },
+  // user site: served at https://bayrjargal0508.github.io/ — domain root, no basePath.
+  // raw <video>/poster attributes read the prefix from here (next/link and
+  // next/image would add it themselves if a basePath ever came back)
+  env: { NEXT_PUBLIC_BASE_PATH: "" },
 };
 
 export default nextConfig;
