@@ -236,14 +236,21 @@ export default function AboutMe() {
         {/* object-position 12% is hand-tuned to this 1914x1080 footage: at phone
             widths it keeps the column on lit plaster rather than on her face.
             Recrop the film and this number silently becomes wrong. The still is
-            the poster, so the frame is never black while the video loads. */}
+            the poster, so the frame is never black while the video loads.
+            Both wait for `near`: a poster always downloads at once and even
+            preload="metadata" opens a request, and at page start either one
+            takes bandwidth from the hero two screens above. */}
         <video
           ref={videoRef}
           src={`${process.env.NEXT_PUBLIC_BASE_PATH}/media/woolen-girl.mp4`}
-          poster={`${process.env.NEXT_PUBLIC_BASE_PATH}/woolen-model-bg.png`}
+          poster={
+            near
+              ? `${process.env.NEXT_PUBLIC_BASE_PATH}/woolen-model-bg.webp`
+              : undefined
+          }
           muted
           playsInline
-          preload={near ? "auto" : "metadata"}
+          preload={near ? "auto" : "none"}
           aria-hidden
           onLoadedMetadata={onLoadedMetadata}
           onSeeked={onSeeked}

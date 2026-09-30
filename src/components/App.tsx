@@ -83,6 +83,7 @@ export default function App() {
       <video
         ref={videoRef}
         src={`${process.env.NEXT_PUBLIC_BASE_PATH}/3d-model-video.mp4`}
+        poster={`${process.env.NEXT_PUBLIC_BASE_PATH}/hero-poster.webp`}
         muted
         playsInline
         preload="auto"

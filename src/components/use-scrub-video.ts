@@ -9,7 +9,14 @@ import { useEffect, useRef } from "react";
    `enabled` is what keeps two films off one decoder: the page holds a hero
    video and an about video at the same time, and iOS Safari will only decode
    one. Each caller passes false while its own film is off screen, so a cursor
-   move never seeks a video nobody can see. */
+   move never seeks a video nobody can see.
+
+   A seek decodes from the previous keyframe, so the film must be cut with
+   short GOPs or every cursor move stalls (one keyframe in 97 frames cost
+   ~200ms a seek). Re-export any replacement film with:
+     ffmpeg -i in.mp4 -an -c:v libx264 -preset veryslow -refs 4 -crf 24 -g 6 \
+       -keyint_min 6 -sc_threshold 0 -bf 0 -pix_fmt yuv420p \
+       -movflags +faststart out.mp4 */
 export function useScrubVideo(enabled = true, sensitivity = 0.8) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const prevXRef = useRef<number | null>(null);
